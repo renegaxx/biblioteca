@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Livros e Carrossel de Livros</title>
+    <link rel="stylesheet" href="bacana.css">
+    <style>
+        /* ... Estilos do CSS ... */
+    </style>
+</head>
+<body>
+    <div class="cadas"><h1>Cadastro de livros</h1></div>
+    <div class="cadastro-form">
+        <input id="nomeLivro" placeholder="Nome" type="text">
+        <input id="autorLivro" placeholder="Autor" type="text">
+        <input id="anoLivro" placeholder="Ano" type="number">
+
+        <select id="generoLivro" placeholder="Gênero">
+            <option value="ação">Pantera Negra</option>
+            <option value="ação">Guerra Civil</option>
+            <option value="ação">Miles Morales</option>
+            <option value="ação">Homem de Ferro</option>
+            <!-- Adicione mais opções de gênero aqui -->
+        </select>
+
+        <button onclick="adicionar()">Adicionar Livro</button>
+        <button onclick="mostrarLivros()">Mostrar</button>
+        <button onclick="apagarLivros()">Deletar</button>
+    </div>
+    <p id="quantidadeLivros"></p>
+    <p id="textoCadastro"></p>
+
+    <div class="letras"><h1>SELECIONE SEU LIVRO</h1></div>
+    <div class="carrossel">
+        <img id="carrosselImagem" src="" alt="Imagem do Carrossel">
+        <div>
+            <button id="anterior">Livro Anterior</button>
+            <button id="proximo">Próximo Livro</button>
+        </div>
+    </div>
+
+    <script>
+        let imgIndice = 0;
+        let IMAGENS = ['livro1.png', 'livro2.png', 'livro3.png', 'livro4.png'];
+        const FUNDO_IMAGENS = [
+            'url("https://a.espncdn.com/photo/2020/0604/r705265_1296x729_16-9.jpg")',
+            // Adicione mais URLs de imagens de fundo correspondentes às imagens de livro
+        ];
+        
+        const prevButton = document.getElementById('anterior');
+        const nextButton = document.getElementById('proximo');
+        var IMG = document.getElementById('carrosselImagem');
+
+        function carregar() {
+            if (imgIndice < 0) {
+                imgIndice = IMAGENS.length - 1;
+            } else if (imgIndice >= IMAGENS.length) {
+                imgIndice = 0;
+            }
+            IMG.src = IMAGENS[imgIndice];
+            document.body.style.backgroundImage = FUNDO_IMAGENS[imgIndice];
+        }
+
+        prevButton.addEventListener('click', () => {
+            --imgIndice;
+            carregar();
+        });
+
+        nextButton.addEventListener('click', () => {
+            ++imgIndice;
+            carregar();
+        });
+
+        carregar();
+
+        let biblioteca = [];
+
+        function adicionar() {
+            let nome = document.getElementById('nomeLivro').value;
+            let autor = document.getElementById('autorLivro').value;
+            let ano = document.getElementById('anoLivro').value;
+            let genero = document.getElementById('generoLivro').value;
+
+            cadastro(nome, autor, ano, genero);
+            mostrarLivros();
+
+            // Atualizar o array de IMAGENS com a imagem do novo livro
+            IMAGENS.push('livro' + (IMAGENS.length + 1) + '.png');
+        }
+
+        function cadastro(nome, autor, ano, genero) {
+            var livro = {
+                titulo: nome,
+                autor: autor,
+                ano: ano,
+                genero: genero
+            };
+            biblioteca.push(livro);
+            atualizarQuantidadeLivros();
+        }
+
+        function mostrarLivros() {
+            let listaLivros = "Livros cadastrados:<br>";
+            for (let x of biblioteca) {
+                listaLivros += `${x.titulo} - ${x.autor} - ${x.ano} - Gênero: ${x.genero}<br>`;
+            }
+            document.getElementById('textoCadastro').innerHTML = listaLivros;
+        }
+
+        function apagarLivros() {
+            biblioteca.length = 0;
+            atualizarQuantidadeLivros();
+            mostrarLivros();
+            // Reiniciar o array de IMAGENS para os valores iniciais
+            IMAGENS = ['livro1.png', 'livro2.png', 'livro3.png', 'livro4.png'];
+        }
+
+        function atualizarQuantidadeLivros() {
+            const quantidadeLivros = biblioteca.length;
+            const quantidadeLivrosText = quantidadeLivros === 1 ? '1 livro cadastrado' : `${quantidadeLivros} livros cadastrados`;
+            document.getElementById('quantidadeLivros').textContent = quantidadeLivrosText;
+
+            const textoCadastro = quantidadeLivros === 0 ? 'Cadastre um livro' : '';
+            document.getElementById('textoCadastro').textContent = textoCadastro;
+
+            function mostrarLivros() {
+        let listaLivros = "Livros cadastrados:<br>";
+        for (let x of biblioteca) {
+            listaLivros += `${x.titulo} - ${x.autor} - ${x.ano} - Gênero: ${x.genero} `;
+            listaLivros += `<button onclick="exibirImagem(${x.imagemIndex})">Mostrar</button><br>`;
+        }
+        document.getElementById('textoCadastro').innerHTML = listaLivros;
+    }
+
+    function exibirImagem(index) {
+        imgIndice = index;
+        carregar();
+    }
+        }
+        function adicionar() {
+    let nome = document.getElementById('nomeLivro').value;
+    let autor = document.getElementById('autorLivro').value;
+    let ano = document.getElementById('anoLivro').value;
+    let genero = document.getElementById('generoLivro').value;
+        }
+
+    cadastro(nome, autor, ano, genero);
+    mostrarLivros();
+
+    // Atualizar o array de IMAGENS com a imagem do novo livro
+    IMAGENS.push('livro' + (IMAGENS.length + 1) + 'livro1.png');
+    
+    </script>
+</body>
+</html>

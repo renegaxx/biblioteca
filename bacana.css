@@ -1,0 +1,48 @@
+body {
+    background-image: url(https://a.espncdn.com/photo/2020/0604/r705265_1296x729_16-9.jpg);
+    
+    align-items: center;
+    text-align: center;
+}
+.carrosel {
+
+}
+#anterior {
+    width: 300px;
+    height: 200px;
+    align-items: center;
+    text-align: center;
+    border-radius: 40px;
+    font-size: 35px;
+    color: red;
+}
+#proximo {
+    width: 300px;
+    height: 200px;
+    align-items: center;
+    text-align: center;
+    border-radius: 40px;
+    margin-left: 40px;
+    font-size: 35px;
+    color: green;
+}
+.letras {
+    text-align: center;
+    color: blue;
+}
+#nomeLivro {
+    width: 200px;
+    height: 30px;
+    border-radius: 40px;
+}
+#autorLivro {
+    width: 200px;
+    height: 30px;
+    border-radius: 40px;
+}
+#anoLivro {
+    width: 200px;
+    height: 30px;
+    border-radius: 40px;
+
+}
